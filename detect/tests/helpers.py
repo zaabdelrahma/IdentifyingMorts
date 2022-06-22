@@ -19,7 +19,7 @@ def get_dataset(**kwargs):
 
 def get_image():
     path = os.path.dirname(__file__)
-    file = 'static/image.jpg'
+    file = 'static/split_frames/testing856.jpg'
     return read_image(os.path.join(path, file))
 
 

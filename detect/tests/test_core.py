@@ -18,7 +18,7 @@ def test_dataset():
     assert dataset[0][0].shape == (3, 1080, 1720)
     assert 'boxes' in dataset[0][1] and 'labels' in dataset[0][1]
     assert dataset[0][1]['boxes'].shape == (2, 4)
-    assert dataset[0][1]['labels'] == ['fish', 'dead_fish']
+    assert dataset[0][1]['labels'] == ['live_fish', 'mort']
 
     transform = transforms.Compose([
         transforms.ToPILImage(),
@@ -105,7 +105,7 @@ def test_model_internal():
 
 # Ensure that fitting the model increases accuracy and returns the losses
 def test_model_fit():
-    model = Model(['fish', 'dead_fish'])
+    model = Model(['live_fish', 'mort'])
 
     dataset = get_dataset()
     loader = DataLoader(dataset, batch_size=1)
@@ -139,9 +139,9 @@ def test_model_fit():
 # images and lists of images to predict on
 # TODO: test applying transforms on images to predict
 def test_model_predict():
-    classes = ['fish', 'dead_dish']
+    classes = ['live_fish', 'mort']
     path = os.path.dirname(__file__)
-    file = os.path.join(path, 'static/model.pth')
+    file = os.path.join(path, 'static/model_weights.pth')
 
     # Load in a pre-fitted model so it can actually make predictions
     model = Model.load(file, classes)
@@ -192,7 +192,7 @@ def test_model_predict():
 # Test that save, load, and get_internal_model all work properly
 def test_model_helpers():
     path = os.path.dirname(__file__)
-    file = os.path.join(path, 'static/saved_model.pth')
+    file = os.path.join(path, 'static/model_weights.pth')
 
     model = get_model()
 

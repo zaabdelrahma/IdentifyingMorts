@@ -6,8 +6,8 @@ from detecto.visualize import *
 
 def test_detect_video():
     path = os.path.dirname(__file__)
-    input_video = os.path.join(path, 'static/input_video.mp4')
-    output_video = os.path.join(path, 'static/output_video.avi')
+    input_video = os.path.join(path, 'static/input_video1.mp4')
+    output_video = os.path.join(path, 'static/outputVideo.mp4')
 
     model = get_model()
     detect_video(model, input_video, output_video)

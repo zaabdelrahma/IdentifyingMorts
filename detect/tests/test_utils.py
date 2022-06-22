@@ -51,7 +51,7 @@ def test_normalize_functions():
 
 def test_read_image():
     path = os.path.dirname(__file__)
-    file = 'static/image.jpg'
+    file = 'static/split_frames/testing856.jpg'
     image_path = os.path.join(path, file)
 
     image = get_image()
@@ -68,23 +68,23 @@ def test_read_image_fails_with_image_not_found():
     assert 'Could not read image foo/bar' == str(e.value)
 
 
-def test_read_image_fails_with_cv_error():
-    image_path = 'static/demo.gif'
+#def test_read_image_fails_with_cv_error():
+   # image_path = 'static/demo.gif'
 
-    with pytest.raises(ValueError) as e:
-        read_image(image_path)
+   # with pytest.raises(ValueError) as e:
+      #  read_image(image_path)
 
-    assert 'Could not read image static/demo.gif' in str(e.value)
+    #assert 'Could not read image static/demo.gif' in str(e.value)
 
 
 def test_split_video():
     path = os.path.dirname(__file__)
-    input_video = os.path.join(path, 'static/input_video.mp4')
+    input_video = os.path.join(path, 'static/input_video1.mp4')
     output_path = os.path.join(path, 'static/split_frames')
 
     os.mkdir(output_path)
 
-    split_video(input_video, output_path, prefix='testing', step_size=-1)
+    split_video(input_video, output_path, prefix='testing', step_size=4)
 
     files = [f for f in os.listdir(output_path)]
 
@@ -105,7 +105,7 @@ def test_xml_to_csv():
 
     assert len(csv) == 2
     assert len(df) == 2
-    assert csv.loc[0, 'filename'] == 'image.jpg'
+    assert csv.loc[0, 'filename'] == 'split_frames/testing856.jpg'
     assert df.loc[1, 'class'] == 'start_gate'
     assert csv.loc[0, 'width'] == 1720
     assert df.loc[1, 'height'] == 1080
